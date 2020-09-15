@@ -12,6 +12,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 public class ProfileServlet extends HttpServlet {
 
@@ -22,18 +23,17 @@ public class ProfileServlet extends HttpServlet {
 
         request.getRequestDispatcher("link.html").include(request, response);
 
-        Cookie ck[] = request.getCookies();
-        if (ck != null) {
-            String name = ck[0].getValue();
-            if (!name.equals("") || name != null) {
-                out.print("<b>Welcome to Profile</b>");
-                out.print("<br>Welcome, " + name);
-                request.getRequestDispatcher("profile.html").include(request, response);
-            }
-        } else {
-            out.print("Please login first");
-            request.getRequestDispatcher("login.html").include(request, response);
-        }
+        HttpSession session=request.getSession(false);  
+        if(session!=null){  
+        String name=(String)session.getAttribute("name");  
+          
+        out.print("Hello, "+name+" Welcome to Profile");
+        request.getRequestDispatcher("profile.html").include(request, response);  
+        }  
+        else{  
+            out.print("Please login first");  
+            request.getRequestDispatcher("login.html").include(request, response);  
+        }  
         out.close();
     }
 }

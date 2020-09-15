@@ -7,6 +7,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 public class LoginServlet extends HttpServlet {
 
@@ -19,15 +20,14 @@ public class LoginServlet extends HttpServlet {
 
         String name = request.getParameter("name");
         String password = request.getParameter("password");
-        
+
         UserDAO us = new UserDAO();
 
         if (password.equals("admin123")) {
             out.print("You are successfully logged in!");
             out.print("<br>Welcome, " + name);
-            Cookie ck = new Cookie("name", name);
-            response.addCookie(ck);
-            out.println("<br>Cookie" + ck);
+            HttpSession session = request.getSession();
+            session.setAttribute("name", name);
 
         } else {
             out.print("sorry, username or password error!");
