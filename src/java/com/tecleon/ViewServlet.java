@@ -17,6 +17,7 @@ public class ViewServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html");
         PrintWriter out = response.getWriter();
+        request.getRequestDispatcher("link.html").include(request, response);
         out.println("<a href='profile.html'>Add New Student</a>");
         out.println("<h1>Students List</h1>");
 

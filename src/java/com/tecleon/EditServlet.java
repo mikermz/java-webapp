@@ -16,6 +16,7 @@ public class EditServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html");
         PrintWriter out = response.getWriter();
+        request.getRequestDispatcher("link.html").include(request, response);
         out.println("<h1>Update Student</h1>");
         String controlNum = request.getParameter("controlNum");
         int id = Integer.parseInt(controlNum);

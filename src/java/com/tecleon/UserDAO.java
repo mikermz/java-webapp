@@ -120,4 +120,14 @@ public class UserDAO {
 
         return list;
     }
+        public ResultSet query(String sql) {
+        ResultSet resultado;
+        try {
+            Statement sentencia = getConnection().createStatement(ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_READ_ONLY);
+            resultado = sentencia.executeQuery(sql);
+        } catch (SQLException e) {
+            System.out.println("The query couldn´t be done");e.printStackTrace();
+            return null;
+        }        return resultado;
+    }
 }

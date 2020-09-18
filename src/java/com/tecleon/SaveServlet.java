@@ -15,6 +15,7 @@ public class SaveServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html");
         PrintWriter out = response.getWriter();
+        request.getRequestDispatcher("link.html").include(request, response);
 
         String studentName = request.getParameter("studentName");
         String controlNum = request.getParameter("controlNum");
@@ -32,7 +33,7 @@ public class SaveServlet extends HttpServlet {
         int status = StudentDAO.save(s);
         if (status > 0) {
             out.print("<p>Record saved successfully! </p>");
-            request.getRequestDispatcher("index.html").include(request, response);
+            request.getRequestDispatcher("profile.html").include(request, response);
         } else {
             out.println("Sorry! unable to save record");
         }
